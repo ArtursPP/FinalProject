@@ -2,6 +2,7 @@ package com.finalProject.model;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "CARD")
@@ -27,7 +28,7 @@ public class Card {
     @Column(name = "STATUS")
     private Integer status;
 
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne( fetch = FetchType.LAZY)
     @JoinColumn(name = "account_id")
     private Account account;
 

@@ -1,6 +1,7 @@
 package com.finalProject.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "ACCOUNT")
@@ -25,14 +26,14 @@ public class Account {
     @Column(name = "STATUS")
     private Integer status;
 
-    @OneToOne(mappedBy = "account", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    private Card card;
+    @OneToMany(mappedBy = "account", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    private List<Card> card;
 
-    public Card getCard() {
+    public List<Card> getCard() {
         return card;
     }
 
-    public void setCard(Card card) {
+    public void setCard(List<Card> card) {
         this.card = card;
     }
 

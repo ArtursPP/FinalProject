@@ -21,6 +21,7 @@ public class CardMapper {
         } else {
             card.setStatus(0);
         }
+
         return card;
     }
 
