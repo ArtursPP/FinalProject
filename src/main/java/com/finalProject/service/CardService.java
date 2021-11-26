@@ -39,18 +39,24 @@ public class CardService {
     }
 
     public List<Card> getCardByCardHolder(String cardHolder) {
-        return cardRepository.findCardByCardHolderIgnoreCase(cardHolder);
+        return cardRepository.findCardByCardHolderContainsIgnoreCase(cardHolder);
     }
 
     public Card getCardByCardNumber(String cardNumber){
         return cardRepository.findCardByCardNumber(cardNumber);
     }
 
-    public List<Card> getAccountIdOrCardHolder(Long id, String cardHolder){
-        return cardRepository.findByAccountIdOrCardHolder(id, cardHolder);
+
+    public List<Card> getAccountIdOrCardHolder(Account id, Card cardHolder){
+
+        return cardRepository.findByAccountIdOrCardHolder(id,  cardHolder);
     }
 
     public List<Card> getCardByExpDate ( Date expDate){
         return cardRepository.findCardByExpDate(expDate);
+    }
+
+    public List<Card> getCardByCardHolderlike(String cardHolder) {
+        return cardRepository.findCardByCardHolderContainsIgnoreCase(cardHolder);
     }
 }

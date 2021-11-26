@@ -12,7 +12,7 @@ import java.util.List;
 public interface CardRepository extends JpaRepository<Card, Long> {
 
 
-    List<Card> findCardByCardHolderIgnoreCase(String cardHolder);
+    List<Card> findCardByCardHolderContainsIgnoreCase(String cardHolder);
 
     List<Card> findCardByExpDate(Date expDate);
 
@@ -20,5 +20,5 @@ public interface CardRepository extends JpaRepository<Card, Long> {
 
 
 
-    List<Card> findByAccountIdOrCardHolder(Long id, String cardHolder);
+    List<Card> findByAccountIdOrCardHolder(Account id, Card cardHolder);
 }

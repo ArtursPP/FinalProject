@@ -51,8 +51,13 @@ public class CardController {
     }
 
     @GetMapping(value = "/cards/{id}/card/{cardHolder}")
-    public List<CardDTO> getAccountIdOrCardHolder(@PathVariable Long id, @PathVariable String cardHolder){
+    public List<CardDTO> getAccountIdOrCardHolder(@PathVariable Account id, @PathVariable Card cardHolder){
         List<Card> cards = cardService.getAccountIdOrCardHolder(id,cardHolder);
+        return cards.stream().map(t -> cardMapper.toCardDTO(t)).collect(Collectors.toList());
+    }
+    @GetMapping(value = "/cards/cardHolder/Like/{cardHolder}")
+    public List<CardDTO> getCardByCardHolderLike (@PathVariable String cardHolder){
+        List<Card> cards = cardService.getCardByCardHolderlike(cardHolder);
         return cards.stream().map(t -> cardMapper.toCardDTO(t)).collect(Collectors.toList());
     }
 }
