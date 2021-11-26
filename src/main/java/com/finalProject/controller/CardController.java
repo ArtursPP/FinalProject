@@ -3,6 +3,7 @@ package com.finalProject.controller;
 
 import com.finalProject.dto.CardDTO;
 import com.finalProject.mapper.CardMapper;
+import com.finalProject.model.Account;
 import com.finalProject.model.Card;
 import com.finalProject.service.CardService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -47,5 +48,11 @@ public class CardController {
     public List<CardDTO> getCardByCardHolder(@PathVariable String cardHolder){
        List<Card>  card = cardService.getCardByCardHolder(cardHolder);
         return card.stream().map(t -> cardMapper.toCardDTO(t)).collect(Collectors.toList());
+    }
+
+    @GetMapping(value = "/cards/{id}/card/{cardHolder}")
+    public List<CardDTO> getAccountIdOrCardHolder(@PathVariable Long id, @PathVariable String cardHolder){
+        List<Card> cards = cardService.getAccountIdOrCardHolder(id,cardHolder);
+        return cards.stream().map(t -> cardMapper.toCardDTO(t)).collect(Collectors.toList());
     }
 }

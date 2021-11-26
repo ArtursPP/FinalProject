@@ -2,7 +2,7 @@ package com.finalProject.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
+import com.finalProject.model.Account;
 
 
 import javax.persistence.Temporal;
@@ -29,6 +29,15 @@ public class CardDTO {
 
     private Long accountId;
 
+    private Account account;
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
 
     private String status;
 

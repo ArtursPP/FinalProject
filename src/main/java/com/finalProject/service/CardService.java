@@ -1,5 +1,6 @@
 package com.finalProject.service;
 
+import com.finalProject.model.Account;
 import com.finalProject.model.Card;
 import com.finalProject.repository.CardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +44,10 @@ public class CardService {
 
     public Card getCardByCardNumber(String cardNumber){
         return cardRepository.findCardByCardNumber(cardNumber);
+    }
+
+    public List<Card> getAccountIdOrCardHolder(Long id, String cardHolder){
+        return cardRepository.findByAccountIdOrCardHolder(id, cardHolder);
     }
 
     public List<Card> getCardByExpDate ( Date expDate){
