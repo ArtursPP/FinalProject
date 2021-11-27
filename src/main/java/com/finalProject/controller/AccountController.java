@@ -2,21 +2,30 @@ package com.finalProject.controller;
 
 
 import com.finalProject.dto.AccountDTO;
+import com.finalProject.dto.CardDTO;
 import com.finalProject.mapper.AccountMapper;
+import com.finalProject.mapper.CardMapper;
 import com.finalProject.model.Account;
+import com.finalProject.model.Card;
 import com.finalProject.service.AccountService;
+import com.finalProject.service.validator.AccountValidator;
+import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
+@AllArgsConstructor
 @RequestMapping(value = "/api/rest/Account.svc")
 public class AccountController {
 
 
     private AccountService accountService;
     private AccountMapper accountMapper;
+    private CardMapper cardMapper;
+    private AccountValidator accountValidator;
 
 
     @GetMapping(value = "/accounts")
@@ -26,15 +35,16 @@ public class AccountController {
 
     }
 
-    public AccountController(AccountService accountService, AccountMapper accountMapper) {
-        this.accountService = accountService;
-        this.accountMapper = accountMapper;
-    }
+
 
     @GetMapping(value = "/account({id})")
     public AccountDTO getAccountById(@PathVariable Long id) {
         Account account = accountService.getAccountById(id);
-        return accountMapper.toDTO(account);
+        List<Card> cards = account.getCards();
+        AccountDTO accountDTO = accountMapper.toDTO(account);
+        List<CardDTO> cardDTOs = cards.stream().map(t -> cardMapper.toCardDTO(t)).collect(Collectors.toList());
+        accountDTO.setCardDTOs(cardDTOs);
+        return accountDTO;
     }
 
     @GetMapping(value = "/account/{accountNumber}")
@@ -71,16 +81,19 @@ public class AccountController {
 
     }
 
-    @PostMapping (value="/account")
-    public AccountDTO saveNewAccount (@RequestBody AccountDTO accountDTO){
+    @PostMapping(value = "/account")
+    public AccountDTO saveNewAccount(@RequestBody @Valid AccountDTO accountDTO) {
+        accountValidator.checkNumberUniq(accountDTO.getAccountNumber());
         Account account = accountMapper.fromDTO(accountDTO);
         Account savedAccount = accountService.saveNewAccount(account);
 
         return accountMapper.toDTO(savedAccount);
 
     }
-    @PutMapping (value="/account")
-    public void updateAccount(@RequestBody AccountDTO accountDTO){
+
+    @PutMapping(value = "/account")
+    public void updateAccount(@RequestBody @Valid AccountDTO accountDTO) {
+
         Account account = accountMapper.fromDTO(accountDTO);
         accountService.updateAccount(account);
     }

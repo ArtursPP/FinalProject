@@ -30,7 +30,7 @@ public class Account {
     private Integer status;
 
     @OneToMany(mappedBy = "account", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Card> card;
+    private List<Card> cards;
 
 
 }

@@ -8,7 +8,7 @@ INSERT INTO account (account_number, currency, ballance, status) VALUES
                                                                      ('LV004UNLA77777777777', 'EUR',15, 0),
                                                                      ('LV005UNLA66666666666', 'USD',550, 1),
                                                                      ('LV006UNLA77777777777', 'EUR',650, 1),
-                                                                     ('LV007UNLA66666666986', 'USD',999, 1),
+                                                                     ('LV007UNLA666666669869', 'USD',999, 1),
                                                                      ('LV008HABA77777777777', 'EUR',75, 0),
                                                                      ('LV009HABA66666666666', 'RUB',589, 1),
                                                                      ('LV010UNLA77777777777', 'EUR',145, 1);
