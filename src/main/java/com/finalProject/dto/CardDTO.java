@@ -25,18 +25,16 @@ public class CardDTO {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date expDate;
 
-    @JsonProperty(value = "account_id")
 
-    private Long accountId;
 
-    private Account account;
+    private AccountDTO accountDTO;
 
-    public Account getAccount() {
-        return account;
+    public AccountDTO getAccountDTO() {
+        return accountDTO;
     }
 
-    public void setAccount(Account account) {
-        this.account = account;
+    public void setAccountDTO(AccountDTO accountDTO) {
+        this.accountDTO = accountDTO;
     }
 
     private String status;
@@ -73,13 +71,7 @@ public class CardDTO {
         this.expDate = expDate;
     }
 
-    public Long getAccountId() {
-        return accountId;
-    }
 
-    public void setAccountId(Long accountId) {
-        this.accountId = accountId;
-    }
 
     public String getStatus() {
         return status;

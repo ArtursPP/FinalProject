@@ -11,11 +11,12 @@ public class CardMapper {
 
     public Card fromCardDTO(CardDTO cardDTO) {
         Card card = new Card();
+
         card.setId(card.getId());
         card.setCardHolder(card.getCardHolder());
         card.setCardNumber(card.getCardNumber());
         card.setExpDate(card.getExpDate());
-        card.setAccountId(card.getAccountId());
+
         if ("ACTIVE".equals(cardDTO.getStatus())) {
             card.setStatus(1);
         } else {
@@ -31,7 +32,7 @@ public class CardMapper {
         cardDTO.setCardHolder(card.getCardHolder());
         cardDTO.setCardNumber(card.getCardNumber());
         cardDTO.setExpDate(card.getExpDate());
-        cardDTO.setAccountId(card.getAccountId());
+
         if (card.getStatus() == 1) {
             cardDTO.setStatus("ACTIVE");
         } else {
