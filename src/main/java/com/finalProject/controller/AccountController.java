@@ -19,6 +19,7 @@ import java.util.stream.Collectors;
 @RestController
 @AllArgsConstructor
 @RequestMapping(value = "/api/rest/Account.svc")
+@CrossOrigin
 public class AccountController {
 
 
