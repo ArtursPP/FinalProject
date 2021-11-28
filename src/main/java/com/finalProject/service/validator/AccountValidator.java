@@ -4,7 +4,6 @@ package com.finalProject.service.validator;
 import com.finalProject.exceptions.AccountAlreadyExistException;
 import com.finalProject.repository.AccountRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 
