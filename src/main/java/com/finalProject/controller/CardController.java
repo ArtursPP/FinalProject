@@ -18,8 +18,9 @@ import java.util.stream.Collectors;
 
 @RestController
 @AllArgsConstructor
+@CrossOrigin
 @RequestMapping(value = "/api/rest/Card.svc")
-@CrossOrigin(origins = "*")
+
 public class CardController {
 
     private CardService cardService;
