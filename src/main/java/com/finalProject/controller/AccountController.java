@@ -8,6 +8,7 @@ import com.finalProject.mapper.CardMapper;
 import com.finalProject.model.Account;
 import com.finalProject.model.Card;
 import com.finalProject.service.AccountService;
+import com.finalProject.service.CardService;
 import com.finalProject.service.validator.AccountValidator;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +20,7 @@ import java.util.stream.Collectors;
 @RestController
 @AllArgsConstructor
 @RequestMapping(value = "/api/rest/Account.svc")
-@CrossOrigin
+@CrossOrigin(origins = "*")
 public class AccountController {
 
 
@@ -27,6 +28,7 @@ public class AccountController {
     private AccountMapper accountMapper;
     private CardMapper cardMapper;
     private AccountValidator accountValidator;
+    private CardService cardService;
 
 
     @GetMapping(value = "/accounts")
@@ -41,8 +43,9 @@ public class AccountController {
     @GetMapping(value = "/account({id})")
     public AccountDTO getAccountById(@PathVariable Long id) {
         Account account = accountService.getAccountById(id);
-        List<Card> cards = account.getCards();
+
         AccountDTO accountDTO = accountMapper.toDTO(account);
+        List<Card> cards = account.getCards();
         List<CardDTO> cardDTOs = cards.stream().map(t -> cardMapper.toCardDTO(t)).collect(Collectors.toList());
         accountDTO.setCardDTOs(cardDTOs);
         return accountDTO;
@@ -97,6 +100,10 @@ public class AccountController {
 
         Account account = accountMapper.fromDTO(accountDTO);
         accountService.updateAccount(account);
+    }
+    @PutMapping(value="/remove({id})")
+    public void removeCardFromAccount(@PathVariable Long id){
+        cardService.removeCardFromAccount(id);
     }
 
 }

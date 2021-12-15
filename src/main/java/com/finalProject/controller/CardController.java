@@ -9,17 +9,17 @@ import com.finalProject.model.Account;
 import com.finalProject.model.Card;
 import com.finalProject.service.AccountService;
 import com.finalProject.service.CardService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
+@AllArgsConstructor
 @RequestMapping(value = "/api/rest/Card.svc")
+@CrossOrigin(origins = "*")
 public class CardController {
 
     private CardService cardService;
@@ -74,5 +74,10 @@ public class CardController {
     public List<CardDTO> getCardByCardHolderLike(@PathVariable String cardHolder) {
         List<Card> cards = cardService.getCardByCardHolderlike(cardHolder);
         return cards.stream().map(t -> cardMapper.toCardDTO(t)).collect(Collectors.toList());
+    }
+
+    @PutMapping(value = "/remove({id})")
+    public void removeCardFromAccount(@PathVariable Long id) {
+        cardService.removeCardFromAccount(id);
     }
 }

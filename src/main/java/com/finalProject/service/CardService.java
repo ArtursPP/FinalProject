@@ -59,4 +59,8 @@ public class CardService {
     public List<Card> getCardByCardHolderlike(String cardHolder) {
         return cardRepository.findCardByCardHolderContainsIgnoreCase(cardHolder);
     }
+
+    public void removeCardFromAccount(Long id){
+        cardRepository.deleteById(id);
+    }
 }
