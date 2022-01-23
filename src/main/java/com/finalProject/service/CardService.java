@@ -29,6 +29,7 @@ public class CardService {
         return cardRepository.findAll();
     }
 
+
     @Autowired
     public CardService(CardRepository cardRepository) {
         this.cardRepository = cardRepository;
